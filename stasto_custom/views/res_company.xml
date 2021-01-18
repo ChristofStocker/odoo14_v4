@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="inherit_view_sales_org_id">
+            <field name="name">inherit_view_sales_org_id</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='website']" position="after">
+                            <field name="sales_org_id" />
+
+                </xpath>
+            </field>
+        </record>
+  </data>
+</odoo>

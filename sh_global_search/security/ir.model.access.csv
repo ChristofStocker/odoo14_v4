@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_global_search,access_global_search,model_global_search,base.group_user,1,1,1,1
+access_global_search_fields,access_global_search_fields,model_global_search_fields,base.group_user,1,1,1,1
+access_o2m_global_search_fields,access_o2m_global_search_fields,model_o2m_global_search_fields,base.group_user,1,1,1,1

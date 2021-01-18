@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stasto_migration,access_stasto_migration,model_stasto_migration,base.group_user,1,1,1,1
+access_stasto_migration_usage,access_stasto_migration_usage,model_stasto_migration_usage,base.group_user,1,1,1,1
+access_stasto_migration_product_substitution,access_stasto_migration_product_substitution,model_stasto_substitution,base.group_user,1,1,1,1

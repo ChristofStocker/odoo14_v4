@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <record model='ir.ui.menu' id='prt_mail_messages.prt_messages_root'>
+      <field name="groups_id" eval="[(6,0,[ref('prt_mail_messages_group.group_messages')])]"/>
+    </record>
+  </data>
+</odoo>

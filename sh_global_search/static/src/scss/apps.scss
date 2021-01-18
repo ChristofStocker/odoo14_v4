@@ -1,0 +1,74 @@
+$o-brand-primary: #243843;
+$o-brand-odoo: #5c8ba6;
+
+.sh_search_results {
+    position: fixed !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: none;
+    border: none;
+    width: 100vw;
+    z-index: 111;
+    top: 45px;
+    background: $o-brand-primary;
+    max-height: calc(100% - #{$o-navbar-height});
+}
+.sh_search_results .dropdown-item:hover {
+    color: #333232;
+}
+.sh_search_results .dropdown-item:active {
+    color: #333232;
+}
+
+.sh_search_results .dropdown-item {
+    color: #fff;
+}
+.sh_search_input {
+    width: 250px;
+    margin-top: 5px;
+}
+
+.sh_search_container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sh_search_input .usermenu_search_input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    box-shadow: none;
+    color: #fff;
+    border-radius: unset;
+}
+.sh_search_input .usermenu_search_input::placeholder {
+    color: #fff;
+}
+
+.sh_search_input .input-group-text {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: #fff;
+}
+.search_company_detail {
+    border-bottom: 1px solid white;
+    margin-bottom: 2px;
+    margin-top: 5px;
+}
+
+
+
+$mk-brand-gradient-start: lighten($o-brand-odoo, 10%);
+$mk-brand-gradient-end: lighten($o-brand-odoo, 20%);
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon .btn-primary {
+    color: $o-brand-primary;
+}
+.o_home_menu_background {
+    background: url(/web_enterprise/static/src/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, $o-brand-primary, $o-brand-odoo);
+}
+.o_main_navbar {
+    border-bottom: 1px solid #121c21;
+    background-color: $o-brand-primary;
+}

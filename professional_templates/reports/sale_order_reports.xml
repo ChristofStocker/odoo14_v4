@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+            <!--inherits the default sales report  and override its name  and file-->
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <field name="model">sale.order</field>
+            <field name="name">Quotation / Order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">professional_templates.sale_order</field>
+        </record>
+        <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+            <field name="model">sale.order</field>
+            <field name="name">PRO-FORMA Invoice</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">professional_templates.report_saleorder_pro_forma</field>
+        </record>
+    </data>
+</odoo>

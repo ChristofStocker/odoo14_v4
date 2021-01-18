@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acl_tracker,pu.tracker default,model_pu_tracker,,1,0,0,0
+acl_tracker_admin,pu_tracker_admin,model_pu_tracker,group_tracker_admin,1,1,1,1
+acl_tracker_usage,pu.tracker.usage default,model_pu_tracker_usage,,1,0,0,0
+acl_tracker_usage_admin,pu_tracker_usage_admin,model_pu_tracker_usage,group_tracker_admin,1,1,1,1

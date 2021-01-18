@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+        <!-- Treeview -->
+        <record id="cbx_invoices_view_tree" model="ir.ui.view">
+            <field name="name">Invoices List</field>
+            <field name="model">cbx.invoice</field>
+            <field name="arch" type="xml">
+                <tree default_order='name desc'>
+                    <field name="customer_id_ext"/>
+                    <field name="name"/>
+                    <field name="invoice_date"/>
+                    <field name="invoice_pos"/>
+                    <field name="product_id_ext"/>
+                    <field name="quantity"/>
+                    <field name="price_unit_net_eur"/>
+                    <field name="average_purchase_price_eur"/>
+                    <field name="margin_eur"/>
+                    <field name="discount"/>
+                    <field name="price_unit_shipment_eur"/>
+                    <field name="company_id"/>
+                    <field name="invoice_type_ext"/>
+                </tree>
+
+            </field>
+        </record>
+
+      <!-- Search/Filter -->
+        <record id="cbx_invoices_view_search" model="ir.ui.view">
+            <field name="name">Invoices Search</field>
+            <field name="model">cbx.invoice</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="customer_id_ext"/>
+                    <field name="product_id_ext"/>
+                    <filter string="Date" name="filter_date" date="invoice_date"/>
+                    <filter string="Without Proforma Orders" name="filter_proforma_orders" domain="[('invoice_type_ext','!=','F5')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Date" name="group_by_date" domain="[]"
+                                context="{'group_by': 'invoice_date'}"/>
+                        <filter string="Company" name="group_by_company_id" domain="[]"
+                                context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+            <!-- Menu -->
+        <record id='cbx_invoice_action' model='ir.actions.act_window'>
+            <field name="name">Invoices</field>
+            <field name="res_model">cbx.invoice</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Reporting" id="cbx_reporting_base_menu" web_icon="cbx_reporting,static/description/reporting.png"/>
+        <menuitem name="Reports" id="cbx_reports" parent="cbx_reporting_base_menu" />
+        <menuitem name="Invoices" id="cbx_invoices" parent="cbx_reports" action="cbx_invoice_action"/>
+  </data>
+</odoo>

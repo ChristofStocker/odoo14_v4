@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <!--## Form ##-->
+    <record id="pu_tracker_res_partner_view_form" model="ir.ui.view">
+        <field name="name">pu_tracker.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']/button[@name='503']" position="after">
+                <button name="partner_tracker" type="object" class="oe_stat_button"
+                        icon="fa-map-marker" attrs="{'invisible': [('tracker_user_count', '=', 0)]}"
+                        context="{'open_mode': 'tracker_user'}">
+                    <field name="tracker_user_count" widget="statinfo" string="Tracker used"/>
+                </button>
+                <button name="partner_tracker" type="object" class="oe_stat_button"
+                        icon="fa-map-marker" attrs="{'invisible': [('tracker_buyer_count', '=', 0)]}"
+                        context="{'open_mode': 'tracker_buyer'}">
+                    <field name="tracker_buyer_count" widget="statinfo" string="Tracker bought"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

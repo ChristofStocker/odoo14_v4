@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+        <!-- Tree View -->
+        <record id="stasto_migration_substitution_view_tree" model="ir.ui.view">
+            <field name="name">Product Substitution</field>
+            <field name="model">stasto.substitution</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id_old"/>
+                    <field name="product_id"/>
+                </tree>
+
+            </field>
+        </record>
+
+      <!-- Formview -->
+        <record id="stasto_migration_substitution_view_form" model="ir.ui.view">
+            <field name="name">Product Substitution</field>
+            <field name="model">stasto.substitution</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id_old"/>
+                                <field name="product_id"/>
+                            </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+      <!-- Menu -->
+        <record id='stasto_substitution_action' model='ir.actions.act_window'>
+            <field name="name">Product Substitution</field>
+            <field name="res_model">stasto.substitution</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    <menuitem name="Product Substitution" id="stasto_migration.menu_2" parent="base.menu_ir_property" action="stasto_substitution_action" sequence="36"/>
+
+
+  </data>
+</odoo>

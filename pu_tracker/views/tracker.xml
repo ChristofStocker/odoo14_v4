@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Treeview -->
+        <record id="pu_tracker_view_tree" model="ir.ui.view">
+            <field name="name">GPS Tracker List</field>
+            <field name="model">pu.tracker</field>
+            <field name="arch" type="xml">
+                <tree default_order='time_updated desc'>
+                    <field name="tracker_id"/>
+                    <field name="time_updated"/>
+                    <field name="trial_duration"/>
+                    <field name="date_trial_end"/>
+                    <field name="setup_fee"/>
+                    <field name="active_device"/>
+                    <field name="user_partner_id"/>
+                    <field name="customer_id"/>
+                    <field name="last_sync_time"/>
+                    <field name="activation_count"/>
+                    <field name="user_email"/>
+                    <field name="delivered_at"/>
+                </tree>
+
+            </field>
+        </record>
+        <!-- Search/Filter -->
+        <record id="pu_tracker_view_search" model="ir.ui.view">
+            <field name="name">GPS Tracker Search</field>
+            <field name="model">pu.tracker</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="tracker_id"/>
+                    <field name="customer_id_ext"/>
+                    <field name="shipment_id_ext"/>
+                    <field name="trial_duration"/>
+                    <field name="setup_fee"/>
+                    <field name="user_partner_id"/>
+                    <field name="customer_id"/>
+                    <field name="user_email"/>
+                    <filter string="Updated at" name="filter_update_date" date="time_updated"/>
+                    <filter string="Delivered at" name="filter_delivered_date" date="delivered_at"/>
+                    <filter string="Active" name="filter_active_device" domain="[('active_device','=',True)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Updated at" name="group_by_time_updated" domain="[]"
+                                context="{'group_by': 'time_updated'}"/>
+                        <filter string="Delivered at" name="group_by_delivered_at" domain="[]"
+                                context="{'group_by': 'delivered_at'}"/>
+                    </group>
+                </search>
+
+            </field>
+        </record>
+
+
+        <!-- Formview -->
+        <record id="pu_tracker_view_form" model="ir.ui.view">
+            <field name="name">GPS Tracker</field>
+            <field name="model">pu.tracker</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="subscription_sync" string="Synchronise Subscription" type="object"> </button>
+                    </header>
+
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="user_partner_id"/>
+                                <field name="customer_id"/>
+                                <field name="customer_id_ext"/>
+                                <field name="user_email"/>
+                                <field name="trial_duration"/>
+                                <field name="date_trial_end"/>
+                                <field name="setup_fee"/>
+                                <field name="active_device"/>
+                                <field name="material_nr"/>
+                                <field name="shipment_id_ext"/>
+                                <field name="delivered_at"/>
+                            </group>
+                            <group>
+                                <field name="tracker_id"/>
+                                <field name="date_activation"/>
+                                <field name="subscription_id"/>
+                                <field name="iccid"/>
+                                <field name="activation_count"/>
+                                <field name="time_created"/>
+                                <field name="time_updated"/>
+                                <field name="last_sync_time"/>
+                            </group>
+                            <div>Deliverd to:</div>
+                            <field name="customer" string="Delivered to"/>
+                            <field name="usage_id">
+                                <tree>
+                                    <field name="user_partner_id"/>
+                                    <field name="user_email"/>
+                                    <field name="time_activated"/>
+                                    <field name="time_deleted"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                    </sheet>
+                </form>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </field>
+        </record>
+
+        <!-- Actionmenue List -->
+        <record id="inherit_multi_pu_tacker_sync_all" model="ir.actions.server">
+            <field name="name">Synchronise all GPS-Tracker</field>
+            <field name="model_id" ref="model_pu_tracker"/>
+            <field name="binding_model_id" ref="model_pu_tracker"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.pu_tracker_sync(None)
+            </field>
+        </record>
+
+
+        <!-- Menu -->
+        <record id='pu_tracker_action' model='ir.actions.act_window'>
+            <field name="name">PowUnity GPS Tracker</field>
+            <field name="res_model">pu.tracker</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="PowUnity GPS-Tracker" id="pu_tracker_base_menu"/>
+        <menuitem name="Tracker" id="pu_tracker_menu" parent="pu_tracker_base_menu" action="pu_tracker_action"/>
+    </data>
+</odoo>

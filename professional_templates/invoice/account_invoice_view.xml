@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_invoice__inherit_customized" model="ir.ui.view">
+            <field name="name">account.move.customized</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//h1[hasclass('mt0')]" position="after">
+                    <h2>
+                        <label for="project_title" class="oe_edit_only"/>
+                        <field name="project_title" class="oe_inline"/>
+                    </h2>
+                </xpath>
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="style"/>
+                </xpath>
+                <xpath expr="//field[@name='narration']" position="before">
+                    <group>
+                        <field name="amount_words"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="account.report_invoice_document" model="ir.ui.view">
+            <field name="name">Odoo Invoice</field>
+        </record>
+    </data>
+</odoo>

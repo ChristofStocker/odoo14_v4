@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+            <!--inherits the default sales report  and override its name  and file-->
+        <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+            <field name="model">purchase.order</field>
+            <field name="name">Purchase Order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">professional_templates.purchase_order</field>
+        </record>
+    </data>
+</odoo>

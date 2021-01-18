@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2018 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+	
+	<template id="_assets_primary_variables" name="Colors" inherit_id="web._assets_primary_variables" priority="15">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/bicolor_backend_theme/static/src/scss/colors.scss"/>
+        </xpath>
+    </template>
+    <template id="assets_backend" name="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+          <!--<script type="text/javascript" src="/bicolor_backend_theme/static/src/js/session.js"/>-->
+<!--            <t t-set="o-brand-primary" value="rgba(124,123,173,1)"/>-->
+            <!--<t>
+                <style>
+                    <t t-set="current_user" t-value="request.env['res.users'].browse(request.uid)._get_current_company()"/>
+                    <t t-set="current_company" t-value="request.env['res.company']._get_current_company()"/>
+                    <t t-set="theme_color_brand" t-value="request.env['res.company'].search([('id', '=', 2)]).theme_color_brand"/>
+                    .o_home_menu_background {
+                        background: url(/web_enterprise/static/src/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, <t t-esc="theme_color_brand" />, #ffffff);
+                    }
+                </style>
+            </t>-->
+
+
+        </xpath>
+    </template>
+</odoo>

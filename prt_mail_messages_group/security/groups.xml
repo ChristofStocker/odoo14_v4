@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+<!-- View lost messages -->
+    <record id="group_messages" model="res.groups">
+        <field name="name">Messages: Access "Messages" Menu</field>
+        <field name="comment">Access "Messages" Menu</field>
+    </record>
+  </data>
+</odoo>

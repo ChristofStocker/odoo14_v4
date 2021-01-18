@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="INVOICE_13_document" name="100 Miles Template">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <div class="header col-12 float-left" t-attf-style="padding-left:0px; padding-right:0px; color:{{style.text_color}};font-size:{{int(style.header_font)}}px;font-family:{{style.font_family}};border-bottom:1px solid {{style.theme_color}}">
+                <t t-if="style.header">
+                    <div class="col-4 float-left" style="padding-left:0px;">
+                        <span t-if="style.logo">
+                            <span itemprop="image" t-field="style.logo" t-options='{"widget": "image"}'/>
+                        </span>
+                    </div>
+                    <div class="col-4 text-center" style="padding-left:0px;">
+                        <h4 t-field="o.project_title" t-attf-style="background-color:{{style.theme_color}};color:{{style.theme_txt_color}};"/>
+                    </div>
+                    <div class="col-4 mb8 float-right" style="padding-bottom:2px;padding-right:0px;">
+                        <div class="float-right" style="width:auto;padding-left:15px;">
+                            <t t-call="professional_templates.company_address"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div class="article page" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}" t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.body_font)}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-12" t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;"><t t-esc="style.wm_eval(o, time, user, res_company)"/></div>
+                <div class="col-12" t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;"><t t-esc="style.wm_eval(o, time, user, res_company)"/></div>
+                <div class="col-12 float-left" t-attf-style="padding-left:0px; padding-right:0px;border-bottom:1px solid {{style.theme_color}};"><!--start of wrapper -->
+                    <div class="col-7 float-left mt8">
+                        <div t-attf-style="display:inline;width:auto;padding:4px; color:{{style.theme_color}};font-size:{{int(style.body_font)+2}}px;font-weight:bold;">
+                            <span><span class="fa fa-file-text-o"/> Invoice To:</span>
+                        </div>
+                        <address t-field="o.partner_id" style="margin-bottom:0px;" t-options='{"widget": "contact", "fields": ["name", "address", "phone",  "email", "website"], "no_marker": false}'/>
+                        <span t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></span>
+                    </div>
+                    <div class="col-5 mt8 mb8 float-right" t-attf-style="background-color:{{style.theme_color}}; color:{{style.theme_txt_color}};">
+                        <h3 id="invoice_title" class="mt4 mb4">
+                            <span t-if="o.state == 'draft'">Draft</span>
+                            <span t-if="o.state == 'cancel'">Cancelled</span>
+                            <span t-if="o.move_type == 'out_invoice'">Invoice</span>
+                            <span t-if="o.move_type == 'out_refund'">Refund</span>
+                            <span t-if="o.move_type == 'in_refund'">Vendor Refund</span>
+                            <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                            <span t-field="o.name" t-if="o.state not in ['cancel', 'draft']"/>
+                        </h3>
+                    </div>
+                    <div class="col-5 mt8 mb8 float-right" t-attf-style="background-color:{{style.theme_color}}; color:{{style.theme_txt_color}};padding:15px;">
+                        <t t-set="div_style" t-value="'color:{};font-size:{}px; width:100%;'.format(style.theme_txt_color,int(style.body_font)+2)"/>
+                        <div t-if="o.invoice_date" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Invoice Date:</strong>
+                            <span t-field="o.invoice_date"/>
+                        </div>
+                        <div t-if="o.invoice_date_due" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Due Date:</strong>
+                            <span t-field="o.invoice_date_due"/>
+                        </div>
+                        <div t-if="o.sudo().user_id" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Salesperson:</strong>
+                            <span t-field="o.sudo().user_id"/>
+                        </div>
+                        <div t-if="o.invoice_origin" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Source Doc:</strong>
+                            <span t-field="o.invoice_origin"/>
+                        </div>
+                        <div t-if="o.fiscal_position_id" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Fiscal Position:</strong>
+                            <span t-field="o.fiscal_position_id"/>
+                        </div>
+                        <div t-if="o.ref" t-attf-style="{{div_style}}">
+                            <strong style="white-space:nowrap;">Reference:</strong>
+                            <span t-field="o.ref"/>
+                        </div>
+                    </div>
+                    <div class="col-7 float-left mt8" t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id">
+                        <div class="mt8" t-attf-style="display:inline;width:auto;padding:4px; color:{{style.theme_color}};font-size:{{int(style.body_font)+2}}px;font-weight:bold;">
+                            <span>
+                                <span class="fa fa-truck "/> Ship To:
+                            </span>
+                        </div>
+                        <address t-field="o.partner_shipping_id" style="margin-bottom:0px; margin-top:4px;" t-options='{"widget": "contact", "fields": ["name", "address", "phone",  "email", "website"], "no_marker": false}'/>
+                        <span t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></span>
+                    </div>
+                </div> <!--end of wrapper2-->
+                <!-- DATA-->
+                <t t-call="professional_templates.invoice_lines"/>
+                    <!--/DATA-->
+            </div><!--End of PAGE-->
+            <!--FOOTER -->
+            <div class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;">
+                <t t-call="professional_templates.company_footer"/>
+            </div>
+            <!--/FOOTER-->
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,86 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="stasto_migration.list">
+      <field name="name">stasto_migration list</field>
+      <field name="model">stasto.migration</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="key_old"/>
+          <field name="key_new"/>
+          <field name="usage"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="stasto_migration.form">
+      <field name="name">stasto_migration list</field>
+      <field name="model">stasto.migration</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="key_old"/>
+            <field name="key_new"/>
+          </group>
+          <group>
+            <field name="usage"/>
+            <field name="description"/>
+          </group>
+          <group>
+            <field name="default_bool"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="stasto_migration.action_window">
+      <field name="name">stasto_migration window</field>
+      <field name="res_model">stasto.migration</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="stasto_migration.action_server">
+      <field name="name">stasto_migration server</field>
+      <field name="model_id" ref="model_stasto_migration_stasto_migration"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="Stasto Migration" id="stasto_migration.menu_root"/>
+-->
+    <!-- menu categories -->
+
+    <menuitem name="STASTO Migration" id="stasto_migration.menu_1" parent="base.menu_ir_property" action="stasto_migration.action_window" sequence="35"/>
+
+    <!--
+    <menuitem name="Settings" id="menu_settings" parent="parent_menu"/>
+    <menuitem id="base.menu_config" name="Configuration" parent="ir.ui.menu" sequence="1" action="stasto_migration.action_window"/>
+    -->
+<!--
+    <menuitem name="Menu 2" id="stasto_migration.menu_2" parent="stasto_migration.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="stasto_migration.menu_1_list" parent="stasto_migration.menu_1"
+              action="stasto_migration.action_window"/>
+    <menuitem name="Server to list" id="stasto_migration" parent="stasto_migration.menu_2"
+              action="stasto_migration.action_server"/>
+-->
+  </data>
+</odoo>

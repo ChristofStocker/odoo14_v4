@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="inherit_view_preferential_country_of_origin">
+        <field name="name">inherit_view_preferential_country_of_origin</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='intrastat_origin_country_id']" position="after">
+                 <field name="preferential_country_of_origin" />
+                <!--<button type="action"
+                     name="%(sh_message.sh_message_wizard)d"
+                     string="SAP" />-->
+            </xpath>
+        </field>
+      </record>
+  </data>
+</odoo>
