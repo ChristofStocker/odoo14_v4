@@ -1,0 +1,16 @@
+$o-brand-primary: #243843;
+$o-brand-odoo: #5c8ba6;
+
+$mk-brand-gradient-start: lighten($o-brand-odoo, 10%);
+$mk-brand-gradient-end: lighten($o-brand-odoo, 20%);
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon .btn-primary {
+    color: $o-brand-primary;
+}
+.o_home_menu_background {
+    background: url(/web_enterprise/static/src/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, $o-brand-primary, $o-brand-odoo);
+}
+.o_main_navbar {
+    border-bottom: 1px solid #121c21;
+    background-color: $o-brand-primary;
+}

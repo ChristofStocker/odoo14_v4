@@ -18,10 +18,22 @@
                     <field name="margin_eur"/>
                     <field name="discount"/>
                     <field name="price_unit_shipment_eur"/>
+                    <field name="currency_id"/>
                     <field name="company_id"/>
                     <field name="invoice_type_ext"/>
                 </tree>
 
+            </field>
+        </record>
+
+      <!-- Graph-View -->
+        <record id="cbx_invoices_view_graph" model="ir.ui.view">
+            <field name="model">cbx.invoice</field>
+            <field name="arch" type="xml">
+                <graph type="bar">
+                    <field name="invoice_date"></field>
+                    <field name="margin_eur" type="measure"></field>
+                </graph>
             </field>
         </record>
 
@@ -35,7 +47,11 @@
                     <field name="customer_id_ext"/>
                     <field name="product_id_ext"/>
                     <filter string="Date" name="filter_date" date="invoice_date"/>
-                    <filter string="Without Proforma Orders" name="filter_proforma_orders" domain="[('invoice_type_ext','!=','F5')]"/>
+                    <filter string="Without internal invoices" name="filter_proforma_orders"
+                            domain="['&amp;', ('invoice_type_ext','!=','F5'), ('invoice_type_ext','!=','F8')
+                            , ('invoice_type_ext','!=','IG'), ('invoice_type_ext','!=','IGS')
+                            , ('invoice_type_ext','!=','IV'), ('invoice_type_ext','!=','IVS')
+                            , ('invoice_type_ext','!=','ZS2')]"/>
                     <group expand="0" string="Group By">
                         <filter string="Date" name="group_by_date" domain="[]"
                                 context="{'group_by': 'invoice_date'}"/>
