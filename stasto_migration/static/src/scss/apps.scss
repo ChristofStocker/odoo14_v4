@@ -14,3 +14,38 @@ $mk-brand-gradient-end: lighten($o-brand-odoo, 20%);
     border-bottom: 1px solid #121c21;
     background-color: $o-brand-primary;
 }
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: darken($o-brand-primary, 5%);
+    color: inherit;
+}
+.o_main_navbar > ul > li > a:hover {
+    background-color: darken($o-brand-primary, 5%);
+}
+
+.btn-fill-primary, .btn-primary {
+    color: #FFFFFF;
+    background-color: $o-brand-odoo;
+    border-color: $o-brand-odoo;
+}
+
+.btn-primary:hover {
+    color: #FFFFFF;
+    background-color: $o-brand-primary;
+    border-color: lighten($o-brand-odoo, 20%);
+}
+
+.btn-fill-secondary, .btn-secondary {
+    color: $o-brand-odoo;
+}
+
+.btn-link, a {
+    color: $o-brand-odoo;
+}
+.badge {
+    border: 1px solid $o-brand-odoo;
+}
+
+.o_searchview .o_searchview_facet
+.o_searchview_facet_label {
+    background-color: $o-brand-primary;
+}

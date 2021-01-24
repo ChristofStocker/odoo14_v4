@@ -364,7 +364,7 @@ class cbx_invoice(models.Model):
                     d.doc_canceled = 0 And
                     d.doc_export_accounting = 1 And
                     d.doc_number >= '{last_sync_id_sap}'
-                    AND d.doc_date_tax >= '20190101' 
+                    AND d.doc_date_tax >= '20070101' 
                 Order By
                     d.doc_number
                 OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY
@@ -458,6 +458,7 @@ class cbx_invoice(models.Model):
         for index, row in data.iterrows():
             cu_code = row.cu_code
             currency = ""
+            exchange_rate = float(row.dd_exchange)
             if cu_code == "€":
                 currency = "EUR"
             elif cu_code == "Kč":
@@ -478,23 +479,16 @@ class cbx_invoice(models.Model):
             quantity = float(row.dl_amount or 0),
             quantity = float(''.join(map(str, quantity)))
 
-            average_purchase_price = float(row["document_storage_avg_price"] or 0) * quantity * 1.05
+            average_purchase_price = (float(row["document_storage_avg_price"] or 0) * quantity * 1.05) / exchange_rate
 
-            margin = ((row["dl_price_sum_wo_vat"] or 0) - average_purchase_price)
-            price_unit_net = row["dl_price_sum_wo_vat"] or 0
+            margin = ((row["dl_price_sum_wo_vat"] or 0) / exchange_rate - average_purchase_price)
+            price_unit_net = (row["dl_price_sum_wo_vat"] or 0) / exchange_rate
 
-            list_price = (float(row.dl_price or 0)) * quantity
+            list_price = (float(row.dl_price or 0)) / exchange_rate * quantity
 
             # list_price = float(''.join(map(str, list_price)))
 
             price_unit_shipment = 0
-
-            if currency_id == 11:
-                margin = margin * 100
-                price_unit_net = price_unit_net * 100
-                list_price = list_price * 100
-                average_purchase_price = average_purchase_price * 100
-                price_unit_shipment = price_unit_shipment * 100
 
             if invoice_type == "credit_note":
                 margin = -margin
@@ -512,7 +506,7 @@ class cbx_invoice(models.Model):
                 'name': row["doc_number"] or "",
                 'invoice_pos': row["dl_position"] or "",
                 'product_id_ext': row["product_id"] or "",
-                # 'exchange_rate': row["KURSK"] or 0,
+                'exchange_rate': exchange_rate,
                 'price_unit': list_price,
                 'price_unit_net': price_unit_net,
                 'price_unit_shipment': price_unit_shipment,
@@ -533,6 +527,7 @@ class cbx_invoice(models.Model):
             invoice_pos = self.env['cbx.invoice'] \
                 .search(['&', ('name', '=', f'{row["doc_number"]}'),
                          ('invoice_pos', '=', f'{row["dl_position"]}'),
+                         ('company_id', '=', company_id),
                          ])
             if len(invoice_pos) == 0:
                 self.env['cbx.invoice'].create(new_rec)
@@ -540,7 +535,9 @@ class cbx_invoice(models.Model):
                 if len(invoice_pos) > 1:
                     sql = f"""delete from cbx_invoice where 
                                 name='{row["doc_number"]}' and
-                                and invoice_pos='{row["dl_position"]}'"""
+                                and invoice_pos='{row["dl_position"]}'
+                                and company_id='{company_id}'
+                            """
                     self.env.cr.execute(sql)
                     self.env['cbx.invoice'].create(new_rec)
                 else:

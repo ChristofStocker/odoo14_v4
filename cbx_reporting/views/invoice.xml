@@ -7,20 +7,17 @@
             <field name="model">cbx.invoice</field>
             <field name="arch" type="xml">
                 <tree default_order='name desc'>
-                    <field name="customer_id_ext"/>
                     <field name="name"/>
-                    <field name="invoice_date"/>
                     <field name="invoice_pos"/>
+                    <field name="invoice_date"/>
+                    <field name="customer_id_ext"/>
                     <field name="product_id_ext"/>
                     <field name="quantity"/>
                     <field name="price_unit_net_eur"/>
                     <field name="average_purchase_price_eur"/>
                     <field name="margin_eur"/>
-                    <field name="discount"/>
-                    <field name="price_unit_shipment_eur"/>
                     <field name="currency_id"/>
                     <field name="company_id"/>
-                    <field name="invoice_type_ext"/>
                 </tree>
 
             </field>
